@@ -1,0 +1,29 @@
+{
+  "name": "jupiter",
+  "version": "1.0.0",
+  "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
+  "main": "jupiter.js",
+  "scripts": {
+    "test": "jasmine-node --verbose spec/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mbjordan/JupiterJS.git"
+  },
+  "keywords": [
+    "Pub/Sub",
+    "pubsub",
+    "publish",
+    "subscribe",
+    "event"
+  ],
+  "author": "mbjordan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbjordan/JupiterJS/issues"
+  },
+  "homepage": "https://github.com/mbjordan/JupiterJS",
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
