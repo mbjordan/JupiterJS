@@ -1,6 +1,6 @@
 {
   "name": "jupiter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
   "main": "jupiter.js",
   "scripts": {
