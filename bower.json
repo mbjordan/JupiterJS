@@ -1,0 +1,29 @@
+{
+  "name": "jupiter",
+  "main": "jupiter.js",
+  "version": "1.0.1",
+  "homepage": "https://github.com/mbjordan/JupiterJS",
+  "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "Pub/Sub",
+    "pubsub",
+    "publish",
+    "subscribe",
+    "event"
+  ],
+  "authors": [
+    "Matt Jordan"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "spec"
+  ]
+}
