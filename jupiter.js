@@ -1,7 +1,7 @@
 /**
 * JupiterJS
 * MIT License (http://honyovk.mit-license.org/).
-* Version 1.0.0
+* Version 1.0.1
 */
 (function(window) {
     var topics = {},
