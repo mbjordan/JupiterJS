@@ -1,7 +1,7 @@
 {
   "name": "jupiter",
   "main": "jupiter.js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "homepage": "https://github.com/mbjordan/JupiterJS",
   "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
   "moduleType": [

@@ -77,7 +77,7 @@ Unsubscribe all callbacks from the message, or when passing a key name (from the
 ---
 
 ```
-.list([true])
+.prove([true])
 ```
 
 Returns all callbacks provided for the provided message. Optionally pass `true` to return the entire callback Object. Method not chainable.

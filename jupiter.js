@@ -1,8 +1,8 @@
 /**
-* JupiterJS
-* MIT License (http://honyovk.mit-license.org/).
-* Version 1.0.1
-*/
+ * JupiterJS
+ * MIT License (http://honyovk.mit-license.org/).
+ * Version 1.1.0
+ */
 (function(window) {
     var topics = {},
         jupiterProto, jupiter;
@@ -12,6 +12,8 @@
     }
 
     jupiterProto = function(_this, message) {
+        var _proto = {};
+
         function setNewCallback(options) {
             var topic = {
                 "key": "_" + new Date().getTime(),
@@ -36,67 +38,68 @@
             return topic;
         }
 
-        return {
-            "sub": function(options) {
-                var i, len;
+        _proto.sub = function(options) {
+            var i, len;
 
-                if (!topics.hasOwnProperty(message)) {
-                    topics[message] = [];
-                }
-
-                if (typeOf(options) === "array") {
-                    for (i = 0, len = options.length; i < len; i++) {
-                        topics[message].push(setNewCallback(options[i]));
-                    }
-                    return this;
-                }
-
-                topics[message].push(setNewCallback(options));
-
-                return this;
-            },
-
-            "pub": function() {
-                var topic, i, len;
-
-                if (!topics.hasOwnProperty(message)) {
-                    return this;
-                }
-
-                topic = topics[message];
-
-                for (i = 0, len = topic.length; i < len; i++) {
-                    topic[i].callback.apply(topic[i].context, arguments);
-                }
-
-                return this;
-            },
-
-            "unsub": function(key) {
-                var i, len;
-
-                if (!topics.hasOwnProperty(message)) {
-                    return this;
-                }
-
-                if (!!key) {
-                    for (i = 0, len = topics[message].length; i < len; i++) {
-                        if (topics[message][i].key === key) {
-                            topics[message].splice(i, 1);
-                            break;
-                        }
-                    }
-                    return this;
-                }
-
-                delete topics[message];
-                return this;
-            },
-
-            "list": function(all) {
-                return (!!all) ? topics : topics[message];
+            if (!topics.hasOwnProperty(message)) {
+                topics[message] = [];
             }
+
+            if (typeOf(options) === "array") {
+                for (i = 0, len = options.length; i < len; i++) {
+                    topics[message].push(setNewCallback(options[i]));
+                }
+                return this;
+            }
+
+            topics[message].push(setNewCallback(options));
+
+            return this;
         };
+
+        _proto.pub = function() {
+            var topic, i, len;
+
+            if (!topics.hasOwnProperty(message)) {
+                return this;
+            }
+
+            topic = topics[message];
+
+            for (i = 0, len = topic.length; i < len; i++) {
+                topic[i].callback.apply(topic[i].context, arguments);
+            }
+
+            return this;
+        };
+
+        _proto.unsub = function(key) {
+            var i, len;
+
+            if (!topics.hasOwnProperty(message)) {
+                return this;
+            }
+
+            if (!!key) {
+                for (i = 0, len = topics[message].length; i < len; i++) {
+                    if (topics[message][i].key === key) {
+                        topics[message].splice(i, 1);
+                        break;
+                    }
+                }
+                return this;
+            }
+
+            delete topics[message];
+            return this;
+        };
+
+        _proto.prove = function(all) { // Renamed, as this is more for testing (Both package and regular use)
+            return (!!all) ? topics : topics[message];
+        };
+        _proto.list = _proto.prove;
+
+        return _proto;
     };
 
     jupiter = function(message) {

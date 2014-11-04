@@ -77,7 +77,7 @@ describe("Jupiter Single Message", function() {
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
 
-        expect(testUnsubscribe.list()[0].key).toBe(ns.key);
+        expect(testUnsubscribe.prove()[0].key).toBe(ns.key);
 
         testUnsubscribe.unsub();
 
