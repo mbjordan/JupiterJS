@@ -29,7 +29,7 @@ var someMessage = jupiter("someMessage");
 someMessage.pub("Console should log this message");
 ```
 
-For more examples, see the [examples page](https://github.com/mbjordan/JupiterJS/wiki/Examples)
+For more examples, see the [examples page](http://mbjordan.github.io/JupiterJS/examples.html)
 
 ---
 
