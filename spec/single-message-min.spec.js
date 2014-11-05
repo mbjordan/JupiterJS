@@ -77,10 +77,14 @@ describe("Jupiter Single Message (Min)", function() {
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
 
-        expect(testUnsubscribe.prove()[0].key).toBe(ns.key);
+        testUnsubscribe.prove(function(callbacks) {
+            expect(callbacks[0].key).toBe(ns.key);
+        });
 
         testUnsubscribe.unsub();
 
-        expect(testUnsubscribe.list()).toBeUndefined();
+        testUnsubscribe.list(function(callbacks) {
+            expect(callbacks).toBeUndefined();
+        });
     });
 });

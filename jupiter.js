@@ -1,7 +1,7 @@
 /**
  * JupiterJS
  * MIT License (http://honyovk.mit-license.org/).
- * Version 1.1.0
+ * Version 1.1.1
  */
 (function(window) {
     var topics = {},
@@ -94,8 +94,14 @@
             return this;
         };
 
-        _proto.prove = function(all) { // Renamed, as this is more for testing (Both package and regular use)
-            return (!!all) ? topics : topics[message];
+        _proto.prove = function(callback, all) { // Renamed, as this is more for testing (Both package and regular use)
+            var _this = this,
+                retValue = (!!all) ? topics : topics[message];
+
+            if (!!callback && typeOf(callback) === "function") {
+                callback.call(_this, retValue);
+            }
+            return _this;
         };
         _proto.list = _proto.prove;
 
