@@ -1,5 +1,7 @@
 ## Jupiter JS
 
+[![npm install jupiter](https://nodei.co/npm/jupiter.png?downloads=true)](https://www.npmjs.org/package/jupiter)
+
 [![Build Status](https://travis-ci.org/mbjordan/JupiterJS.svg?branch=master)](https://travis-ci.org/mbjordan/JupiterJS)
 
 Jupiter is a JavaScript Publish/Subscribe library that aims to be lightweight, dependency-free, and simple to use. Drop it into any project to quickly get up and running with a super sweet event-based model.
