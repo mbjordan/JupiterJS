@@ -1,8 +1,8 @@
-var jupiter = require("../jupiter.min.js"),
+var jupiter = require("../jupiter.min"),
     messageArr = ["testMessage1", "testMessage2", "testMessage3"],
     jupiterTestObj = jupiter(messageArr);
 
-describe("Jupiter Message Array (Min)", function() {
+describe("Jupiter Message Array - Minified", function() {
 
     it("should return an Object-literal when passed an Array", function() {
         expect(jupiterTestObj).toEqual(jasmine.any(Object));
@@ -14,7 +14,7 @@ describe("Jupiter Message Array (Min)", function() {
     });
 
 
-    it("should allow a direct function to subscribe & be called for testMessage1", function() {
+    it("Allow a direct function to subscribe & be called for testMessage1", function() {
         var ns = {
             "fn": function(arg) {},
             "arg": "_testMessage1"
@@ -28,7 +28,7 @@ describe("Jupiter Message Array (Min)", function() {
     });
 
 
-    it("should allow a direct function to subscribe & be called for testMessage2", function() {
+    it("Allow a direct function to subscribe & be called for testMessage2", function() {
         var ns = {
             "fn": function(arg) {},
             "arg": "_testMessage2"
@@ -42,7 +42,7 @@ describe("Jupiter Message Array (Min)", function() {
     });
 
 
-    it("should allow a direct function to subscribe & be called for testMessage3", function() {
+    it("Allow a direct function to subscribe & be called for testMessage3", function() {
         var ns = {
             "fn": function(arg) {},
             "arg": "_testMessage3"

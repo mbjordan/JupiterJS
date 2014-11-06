@@ -2,7 +2,7 @@ var jupiter = require("../jupiter");
 
 describe("Jupiter Single Message", function() {
 
-    it("should allow a direct function to subscribe", function() {
+    it("Allow a function to subscribe & be called", function() {
         var ns = {
             "name": "directSubscribe",
             "fn": function(arg) {},
@@ -17,49 +17,43 @@ describe("Jupiter Single Message", function() {
     });
 
 
-    it("should allow a single Object-literal to subscribe", function() {
+    it("Allow a function to subscribe & be called with optional context", function() {
         var ns = {
-            "name": "objectSubscribe",
-            "fn": function(arg) {},
-            "arg": "_argumentObject",
-            "key": "fn1"
+            "name": "directSubscribe",
+            "fn": function(arg) {
+                expect(typeof this.results_).toEqual("object");
+            },
+            "arg": "_argumentDirect"
         };
 
-        spyOn(ns, "fn");
+        spyOn(ns, "fn").andCallThrough();
 
-        jupiter(ns.name).sub({
-            "key": ns.key,
-            "callback": ns.fn
-        }).pub(ns.arg);
+        jupiter(ns.name).sub(ns.fn, this).pub(ns.arg);
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
     });
 
 
-    it("should allow an array with a direct funtion and an Object-literal to subscribe", function() {
-        var ns = {
-            "name": "arraySubscribe",
-            "fn1": function(arg) {},
-            "fn2": function(arg) {},
-            "arg": "_argumentArray",
-            "key": "fn1"
-        };
+    it("Allow a function to subscribe & be called with optional key & context", function() {
+        var _this = this,
+            ns = {
+                "name": "directSubscribe",
+                "fn": function(arg) {
+                    expect(typeof this.results_).toEqual("object");
+                },
+                "arg": "_argumentDirect",
+                "key": "_testFn"
+            };
 
-        spyOn(ns, "fn1");
-        spyOn(ns, "fn2");
+        spyOn(ns, "fn").andCallThrough();
 
-        jupiter(ns.name).sub([{
-                "key": ns.key,
-                "callback": ns.fn1
-            }, ns.fn2
-        ]).pub(ns.arg);
+        jupiter(ns.name).sub(ns.key, ns.fn, _this).pub(ns.arg);
 
-        expect(ns.fn1).toHaveBeenCalledWith(ns.arg);
-        expect(ns.fn2).toHaveBeenCalledWith(ns.arg);
+        expect(ns.fn).toHaveBeenCalledWith(ns.arg);
     });
 
 
-    it("should allow a single Object-literal to subscribe, be called, & unsubscribed", function() {
+    it("Allow a function with optional key to subscribe, be called, & unsubscribed", function() {
         var ns = {
                 "name": "testUnsubscribe",
                 "fn": function(arg) {},
@@ -70,21 +64,18 @@ describe("Jupiter Single Message", function() {
 
         spyOn(ns, "fn");
 
-        testUnsubscribe.sub({
-            "key": ns.key,
-            "callback": ns.fn
-        }).pub(ns.arg);
+        testUnsubscribe.sub(ns.key, ns.fn).pub(ns.arg);
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
 
-        testUnsubscribe.prove(function(callbacks) {
-            expect(callbacks[0].key).toBe(ns.key);
+        testUnsubscribe.prove(function(topics) {
+            expect(topics[0].key).toBe(ns.key);
         });
 
         testUnsubscribe.unsub();
 
-        testUnsubscribe.list(function(callbacks) {
-            expect(callbacks).toBeUndefined();
+        testUnsubscribe.list(function(topics) {
+            expect(topics).toBeUndefined();
         });
     });
 });

@@ -1,7 +1,7 @@
 /**
  * JupiterJS
  * MIT License (http://honyovk.mit-license.org/).
- * Version 1.1.1
+ * Version 1.2.0
  */
 (function(window) {
     var topics = {},
@@ -11,48 +11,21 @@
         return Object.prototype.toString.call(what || null).replace(/\[object\s|\]/g, "").toLowerCase();
     }
 
-    jupiterProto = function(_this, message) {
+    jupiterProto = function(jupiterContext, message) {
         var _proto = {};
 
-        function setNewCallback(options) {
-            var topic = {
-                "key": "_" + new Date().getTime(),
-                "callback": function() {},
-                "context": _this
-            };
-
-            if (typeof options === "function") {
-                topic.callback = options;
-                return topic;
-            }
-
-            if (typeOf(options) === "object") {
-                for (var i in topic) {
-                    if (options.hasOwnProperty(i)) {
-                        topic[i] = options[i];
-                    }
-                }
-                return topic;
-            }
-
-            return topic;
-        }
-
-        _proto.sub = function(options) {
-            var i, len;
+        _proto.sub = function(key, fn, context) {
+            var newTopic = {};
 
             if (!topics.hasOwnProperty(message)) {
                 topics[message] = [];
             }
 
-            if (typeOf(options) === "array") {
-                for (i = 0, len = options.length; i < len; i++) {
-                    topics[message].push(setNewCallback(options[i]));
-                }
-                return this;
-            }
+            newTopic.key = (typeOf(key) === "string") ? key : "_" + new Date().getTime();
+            newTopic.fn = (typeOf(key) === "function") ? key : ((!!fn && typeOf(fn) === "function") ? fn : function() {});
+            newTopic.context = (!!fn && typeOf(fn) === "object") ? fn : ((!!context) ? context : jupiterContext);
 
-            topics[message].push(setNewCallback(options));
+            topics[message].push(newTopic);
 
             return this;
         };
@@ -67,7 +40,7 @@
             topic = topics[message];
 
             for (i = 0, len = topic.length; i < len; i++) {
-                topic[i].callback.apply(topic[i].context, arguments);
+                topic[i].fn.apply(topic[i].context, arguments);
             }
 
             return this;

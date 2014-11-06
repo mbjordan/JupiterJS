@@ -14,7 +14,7 @@ describe("Jupiter Message Array", function() {
     });
 
 
-    it("should allow a direct function to subscribe & be called for testMessage1", function() {
+    it("Allow a direct function to subscribe & be called for testMessage1", function() {
         var ns = {
             "fn": function(arg) {},
             "arg": "_testMessage1"
@@ -28,7 +28,7 @@ describe("Jupiter Message Array", function() {
     });
 
 
-    it("should allow a direct function to subscribe & be called for testMessage2", function() {
+    it("Allow a direct function to subscribe & be called for testMessage2", function() {
         var ns = {
             "fn": function(arg) {},
             "arg": "_testMessage2"
@@ -42,7 +42,7 @@ describe("Jupiter Message Array", function() {
     });
 
 
-    it("should allow a direct function to subscribe & be called for testMessage3", function() {
+    it("Allow a direct function to subscribe & be called for testMessage3", function() {
         var ns = {
             "fn": function(arg) {},
             "arg": "_testMessage3"
