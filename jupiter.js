@@ -5,13 +5,13 @@
  */
 (function(window) {
     var topics = {},
-        jupiterProto, jupiter;
+        jupiter, init;
 
     function typeOf(what) {
         return Object.prototype.toString.call(what || null).replace(/\[object\s|\]/g, "").toLowerCase();
     }
 
-    jupiterProto = function(jupiterContext, message) {
+    jupiter = function(_context, message) {
         var proto = {};
 
         proto.sub = function(key, fn, context) {
@@ -23,7 +23,7 @@
 
             newTopic.key = (typeOf(key) === "string") ? key : "_" + new Date().getTime();
             newTopic.fn = (typeOf(key) === "function") ? key : ((!!fn && typeOf(fn) === "function") ? fn : function() {});
-            newTopic.context = (!!fn && typeOf(fn) === "object") ? fn : ((!!context) ? context : jupiterContext);
+            newTopic.context = (!!fn && typeOf(fn) === "object") ? fn : ((!!context) ? context : _context);
 
             topics[message].push(newTopic);
 
@@ -67,7 +67,7 @@
             return this;
         };
 
-        proto.prove = function(callback, all) { // Renamed, as this is more for testing (Both package and regular use)
+        proto.prove = function(callback, all) {
             var _this = this,
                 retValue = (!!all) ? topics : topics[message];
 
@@ -81,7 +81,7 @@
         return proto;
     };
 
-    jupiter = function(message) {
+    init = function(message) {
         var _this = this,
             protos, i, len;
 
@@ -93,25 +93,25 @@
             protos = {};
 
             for (i = 0, len = message.length; i < len; i++) {
-                protos[message[i]] = jupiterProto(_this, message[i]);
+                protos[message[i]] = jupiter(_this, message[i]);
             }
             return protos;
         }
 
-        return jupiterProto(_this, message);
+        return jupiter(_this, message);
     };
 
     if (typeof define === "function" && define.amd) {
         define(function() {
-            return jupiter;
+            return init;
         });
         return;
     }
 
     if ("undefined" !== typeof module && module.exports) {
-        module.exports = jupiter;
+        module.exports = init;
         return;
     }
 
-    window.jupiter = jupiter;
+    window.jupiter = init;
 }(("undefined" !== typeof window) ? window : {}));
