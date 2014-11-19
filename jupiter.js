@@ -1,7 +1,7 @@
 /**
  * JupiterJS
  * MIT License (http://honyovk.mit-license.org/).
- * Version 1.2.0
+ * Version 1.2.1
  */
 (function(window) {
     var topics = {},
@@ -83,14 +83,15 @@
 
     jupiter = function(message) {
         var _this = this,
-            protos = {},
-            i, len;
+            protos, i, len;
 
         if (!message) {
             throw new Error("Jupiter requires a message");
         }
 
         if (typeOf(message) === "array") {
+            protos = {};
+            
             for (i = 0, len = message.length; i < len; i++) {
                 protos[message[i]] = jupiterProto(_this, message[i]);
             }
