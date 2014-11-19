@@ -12,9 +12,9 @@
     }
 
     jupiterProto = function(jupiterContext, message) {
-        var _proto = {};
+        var proto = {};
 
-        _proto.sub = function(key, fn, context) {
+        proto.sub = function(key, fn, context) {
             var newTopic = {};
 
             if (!topics.hasOwnProperty(message)) {
@@ -30,7 +30,7 @@
             return this;
         };
 
-        _proto.pub = function() {
+        proto.pub = function() {
             var topic, i, len;
 
             if (!topics.hasOwnProperty(message)) {
@@ -46,7 +46,7 @@
             return this;
         };
 
-        _proto.unsub = function(key) {
+        proto.unsub = function(key) {
             var i, len;
 
             if (!topics.hasOwnProperty(message)) {
@@ -67,7 +67,7 @@
             return this;
         };
 
-        _proto.prove = function(callback, all) { // Renamed, as this is more for testing (Both package and regular use)
+        proto.prove = function(callback, all) { // Renamed, as this is more for testing (Both package and regular use)
             var _this = this,
                 retValue = (!!all) ? topics : topics[message];
 
@@ -76,9 +76,9 @@
             }
             return _this;
         };
-        _proto.list = _proto.prove;
+        proto.list = proto.prove;
 
-        return _proto;
+        return proto;
     };
 
     jupiter = function(message) {
@@ -91,7 +91,7 @@
 
         if (typeOf(message) === "array") {
             protos = {};
-            
+
             for (i = 0, len = message.length; i < len; i++) {
                 protos[message[i]] = jupiterProto(_this, message[i]);
             }
