@@ -1,3 +1,7 @@
+### 1.2.1
+
+* Interal changes. API Still the same.
+
 ### 1.2.0
 
 * Changed the `sub` method to accept only 3 static arguments (`[key, ]callback[, context]`). No more Objects or Arrays.
