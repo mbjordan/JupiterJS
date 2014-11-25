@@ -74,7 +74,7 @@ describe("Jupiter Single Message", function() {
 
         testUnsubscribe.unsub();
 
-        testUnsubscribe.list(function(topics) {
+        testUnsubscribe.prove(function(topics) {
             expect(topics).toBeUndefined();
         });
     });
