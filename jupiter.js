@@ -77,7 +77,6 @@
             }
             return _this;
         };
-        proto.list = proto.prove;
 
         return proto;
     };
