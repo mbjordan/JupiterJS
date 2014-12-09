@@ -1,6 +1,6 @@
 /**
  * JupiterJS
- * MIT License (http://honyovk.mit-license.org/).
+ * MIT License (http://honyovk.com/mit.txt).
  * Version 1.2.1
  */
 
