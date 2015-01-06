@@ -16,6 +16,12 @@ describe("Jupiter Single Message - Minified", function() {
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
     });
 
+    it('Return an error when no message is given', function() {
+
+        expect(function() {
+            jupiter();
+        }).toThrow(new Error('Jupiter requires a message'));
+    });
 
     it("Allow a function to subscribe & be called with optional context", function() {
         var ns = {
