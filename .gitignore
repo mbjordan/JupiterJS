@@ -2,3 +2,4 @@
 node_modules
 readme-next.md
 coverage
+.coveralls.yml
