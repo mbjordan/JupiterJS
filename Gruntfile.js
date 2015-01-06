@@ -2,10 +2,9 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		jasmine_node: {
-			task_name: {
+			jupiter_test: {
 				options: {
 					coverage: {},
-					forceExit: true,
 					match: '.',
 					matchAll: false,
 					specFolders: ['spec'],
@@ -20,12 +19,14 @@ module.exports = function(grunt) {
 			}
 		},
 		coveralls: {
-			src: 'coverage/lcov.info'
+			jupiter_test: {
+				src: 'coverage/lcov.info'
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-jasmine-node-coverage');
 	grunt.loadNpmTasks('grunt-coveralls');
 
-	grunt.registerTask('test', ['jasmine_node', 'coveralls']);
+	grunt.registerTask('dotest', ['jasmine_node:jupiter_test', 'coveralls:jupiter_test']);
 };

@@ -4,7 +4,7 @@
   "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
   "main": "jupiter.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt dotest"
   },
   "repository": {
     "type": "git",
