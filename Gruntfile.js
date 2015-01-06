@@ -18,10 +18,17 @@ module.exports = function(grunt) {
                 },
                 src: ['jupiter.js']
             }
+        },
+        coveralls: {
+            options: {
+                src: 'coverage/lcov.info',
+                force: true
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-jasmine-node-coverage');
+    grunt.loadNpmTasks('grunt-coveralls');
 
-    grunt.registerTask('test', 'jasmine_node');
+    grunt.registerTask('test', ['jasmine_node', 'coveralls']);
 };

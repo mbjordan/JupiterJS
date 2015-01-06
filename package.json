@@ -24,8 +24,8 @@
   },
   "homepage": "http://mbjordan.github.io/JupiterJS/",
   "devDependencies": {
-    "coveralls": "^2.11.2",
     "grunt": "^0.4.5",
+    "grunt-coveralls": "^1.0.0",
     "grunt-jasmine-node-coverage": "^0.3.1"
   }
 }
