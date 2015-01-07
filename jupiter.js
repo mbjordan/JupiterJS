@@ -16,17 +16,17 @@
 		var proto = {};
 
 		proto.sub = function(key, fn, context) {
-			var newMessage = {};
+			var newTopic = {};
 
 			if (!topics.hasOwnProperty(topic)) {
 				topics[topic] = [];
 			}
 
-			newMessage.key = (typeOf(key) === 'string') ? key : '_' + new Date().getTime();
-			newMessage.fn = (typeOf(key) === 'function') ? key : ((!!fn && typeOf(fn) === 'function') ? fn : function() {});
-			newMessage.context = (!!fn && typeOf(fn) === 'object') ? fn : ((!!context) ? context : _context);
+			newTopic.key = (typeOf(key) === 'string') ? key : '_' + new Date().getTime();
+			newTopic.fn = (typeOf(key) === 'function') ? key : ((!!fn && typeOf(fn) === 'function') ? fn : function() {});
+			newTopic.context = (!!fn && typeOf(fn) === 'object') ? fn : ((!!context) ? context : _context);
 
-			topics[topic].push(newMessage);
+			topics[topic].push(newTopic);
 
 			return this;
 		};
