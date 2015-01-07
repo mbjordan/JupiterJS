@@ -53,7 +53,7 @@ describe('Jupiter Single Message', function() {
 
     it('Allow a function to subscribe, be called, & unsubscribed', function() {
         var ns = {
-                'name': 'testUnsubscribe',
+                'name': 'testUnsubscribe1',
                 'fn': function(arg) {},
                 'arg': '_argumentUnsub'
             },
@@ -74,7 +74,7 @@ describe('Jupiter Single Message', function() {
 
     it('Allow a function with optional key to subscribe, be called, & unsubscribed', function() {
         var ns = {
-                'name': 'testUnsubscribe',
+                'name': 'testUnsubscribe2',
                 'fn': function(arg) {},
                 'arg': '_argumentUnsub',
                 'key': '_testFn'
