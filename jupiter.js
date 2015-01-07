@@ -68,12 +68,12 @@
             return this;
         };
 
-        proto.prove = function(callback, all) {
+        proto.prove = function(fn, all) {
             var _this = this,
                 retValue = (!!all) ? topics : topics[topic];
 
-            if (!!callback && typeOf(callback) === 'function') {
-                callback.call(_this, retValue);
+            if (!!fn && typeOf(fn) === 'function') {
+                fn.call(_this, retValue);
             }
             return _this;
         };
