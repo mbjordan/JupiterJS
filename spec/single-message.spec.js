@@ -52,6 +52,32 @@ describe('Jupiter Single Message', function() {
 	});
 
 
+
+	it('Allow a function to subscribe, be called, & unsubscribed', function() {
+		var ns = {
+			'name': 'testUnsubscribe',
+			'fn': function(arg) {},
+			'arg': '_argumentUnsub'
+		},
+		testUnsubscribe = jupiter(ns.name);
+
+		spyOn(ns, 'fn');
+
+		testUnsubscribe.sub(ns.fn).pub(ns.arg);
+
+		expect(ns.fn).toHaveBeenCalledWith(ns.arg);
+
+		testUnsubscribe.unsub();
+
+		testUnsubscribe.prove(function(topics) {
+			expect(topics).toBeUndefined();
+		});
+	});
+
+
+
+
+
 	it('Allow a function with optional key to subscribe, be called, & unsubscribed', function() {
 		var ns = {
 				'name': 'testUnsubscribe',
