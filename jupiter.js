@@ -12,21 +12,21 @@
 		return Object.prototype.toString.call(what || null).replace(/\[object\s|\]/g, '').toLowerCase();
 	}
 
-	jupiter = function(_context, message) {
+	jupiter = function(_context, topic) {
 		var proto = {};
 
 		proto.sub = function(key, fn, context) {
 			var newMessage = {};
 
-			if (!topics.hasOwnProperty(message)) {
-				topics[message] = [];
+			if (!topics.hasOwnProperty(topic)) {
+				topics[topic] = [];
 			}
 
 			newMessage.key = (typeOf(key) === 'string') ? key : '_' + new Date().getTime();
 			newMessage.fn = (typeOf(key) === 'function') ? key : ((!!fn && typeOf(fn) === 'function') ? fn : function() {});
 			newMessage.context = (!!fn && typeOf(fn) === 'object') ? fn : ((!!context) ? context : _context);
 
-			topics[message].push(newMessage);
+			topics[topic].push(newMessage);
 
 			return this;
 		};
@@ -34,11 +34,11 @@
 		proto.pub = function() {
 			var msg, i, len;
 
-			if (!topics.hasOwnProperty(message)) {
+			if (!topics.hasOwnProperty(topic)) {
 				return this;
 			}
 
-			msg = topics[message];
+			msg = topics[topic];
 
 			for (i = 0, len = msg.length; i < len; i++) {
 				msg[i].fn.apply(msg[i].context, arguments);
@@ -50,27 +50,27 @@
 		proto.unsub = function(key) {
 			var i, len;
 
-			if (!topics.hasOwnProperty(message)) {
+			if (!topics.hasOwnProperty(topic)) {
 				return this;
 			}
 
 			if (!!key) {
-				for (i = 0, len = topics[message].length; i < len; i++) {
-					if (topics[message][i].key === key) {
-						topics[message].splice(i, 1);
+				for (i = 0, len = topics[topic].length; i < len; i++) {
+					if (topics[topic][i].key === key) {
+						topics[topic].splice(i, 1);
 						break;
 					}
 				}
 				return this;
 			}
 
-			delete topics[message];
+			delete topics[topic];
 			return this;
 		};
 
 		proto.prove = function(callback, all) {
 			var _this = this,
-				retValue = (!!all) ? topics : topics[message];
+				retValue = (!!all) ? topics : topics[topic];
 
 			if (!!callback && typeOf(callback) === 'function') {
 				callback.call(_this, retValue);
@@ -81,24 +81,24 @@
 		return proto;
 	};
 
-	init = function(message) {
+	init = function(topic) {
 		var _this = this,
 			protos, i, len;
 
-		if (!message) {
-			throw new Error('Jupiter requires a message');
+		if (!topic) {
+			throw new Error('Jupiter requires a topic');
 		}
 
-		if (typeOf(message) === 'array') {
+		if (typeOf(topic) === 'array') {
 			protos = {};
 
-			for (i = 0, len = message.length; i < len; i++) {
-				protos[message[i]] = jupiter(_this, message[i]);
+			for (i = 0, len = topic.length; i < len; i++) {
+				protos[topic[i]] = jupiter(_this, topic[i]);
 			}
 			return protos;
 		}
 
-		return jupiter(_this, message);
+		return jupiter(_this, topic);
 	};
 
 	if (typeof define === 'function' && define.amd) {
