@@ -83,19 +83,19 @@
 
     init = function(topic) {
         var _this = this,
-            protos, i, len;
+            multiTopic, i, len;
 
         if (!topic) {
             throw new Error('Jupiter requires a topic');
         }
 
         if (typeOf(topic) === 'array') {
-            protos = {};
+            multiTopic = {};
 
             for (i = 0, len = topic.length; i < len; i++) {
-                protos[topic[i]] = jupiter(_this, topic[i]);
+                multiTopic[topic[i]] = jupiter(_this, topic[i]);
             }
-            return protos;
+            return multiTopic;
         }
 
         return jupiter(_this, topic);
