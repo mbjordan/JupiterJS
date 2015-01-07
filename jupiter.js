@@ -5,7 +5,7 @@
  */
 
 (function(window) {
-	var messages = {},
+	var topics = {},
 		jupiter, init;
 
 	function typeOf(what) {
@@ -18,15 +18,15 @@
 		proto.sub = function(key, fn, context) {
 			var newMessage = {};
 
-			if (!messages.hasOwnProperty(message)) {
-				messages[message] = [];
+			if (!topics.hasOwnProperty(message)) {
+				topics[message] = [];
 			}
 
 			newMessage.key = (typeOf(key) === 'string') ? key : '_' + new Date().getTime();
 			newMessage.fn = (typeOf(key) === 'function') ? key : ((!!fn && typeOf(fn) === 'function') ? fn : function() {});
 			newMessage.context = (!!fn && typeOf(fn) === 'object') ? fn : ((!!context) ? context : _context);
 
-			messages[message].push(newMessage);
+			topics[message].push(newMessage);
 
 			return this;
 		};
@@ -34,11 +34,11 @@
 		proto.pub = function() {
 			var msg, i, len;
 
-			if (!messages.hasOwnProperty(message)) {
+			if (!topics.hasOwnProperty(message)) {
 				return this;
 			}
 
-			msg = messages[message];
+			msg = topics[message];
 
 			for (i = 0, len = msg.length; i < len; i++) {
 				msg[i].fn.apply(msg[i].context, arguments);
@@ -50,27 +50,27 @@
 		proto.unsub = function(key) {
 			var i, len;
 
-			if (!messages.hasOwnProperty(message)) {
+			if (!topics.hasOwnProperty(message)) {
 				return this;
 			}
 
 			if (!!key) {
-				for (i = 0, len = messages[message].length; i < len; i++) {
-					if (messages[message][i].key === key) {
-						messages[message].splice(i, 1);
+				for (i = 0, len = topics[message].length; i < len; i++) {
+					if (topics[message][i].key === key) {
+						topics[message].splice(i, 1);
 						break;
 					}
 				}
 				return this;
 			}
 
-			delete messages[message];
+			delete topics[message];
 			return this;
 		};
 
 		proto.prove = function(callback, all) {
 			var _this = this,
-				retValue = (!!all) ? messages : messages[message];
+				retValue = (!!all) ? topics : topics[message];
 
 			if (!!callback && typeOf(callback) === 'function') {
 				callback.call(_this, retValue);
