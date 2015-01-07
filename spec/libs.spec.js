@@ -2,31 +2,31 @@ var typeOf = require('../lib/type-of');
 
 describe('typeOf', function() {
 
-	it('Match Array', function() {
-		var match = typeOf([]);
+    it('Match Array', function() {
+        expect(typeOf([])).toBe('array');
+    });
 
-		expect(match).toBe('array');
-	});
+    it('Match Object', function() {
+        expect(typeOf({})).toBe('object');
+    });
 
-	it('Match Object', function() {
-		var match = typeOf({});
+    it('Match String', function() {
+        expect(typeOf('s')).toBe('string');
+    });
 
-		expect(match).toBe('object');
-	});
+    it('Match Number', function() {
+        expect(typeOf(123e7)).toBe('number');
+    });
 
-	it('Match String', function() {
-		var match = typeOf(' ');
+    it('Match Function', function() {
+        expect(typeOf(function() {})).toBe('function');
+    });
 
-		expect(match).toBe('string');
-	});
+    it('Match RegExp', function() {
+        expect(typeOf(/\s/)).toBe('regexp');
+    });
 
-	it('Match Number', function() {
-		var match = typeOf(123e7);
-
-		expect(match).toBe('number');
-	});
-
-	// it('Match ', function() {
-	// });
-
+    it('Match Null', function() {
+        expect(typeOf()).toBe('null');
+    });
 });
