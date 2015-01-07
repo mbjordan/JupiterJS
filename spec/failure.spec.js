@@ -1,4 +1,4 @@
-var jupiter = require("../jupiter.min");
+var jupiter = require("../jupiter");
 
 describe("Jupiter Expected Failures", function() {
 
