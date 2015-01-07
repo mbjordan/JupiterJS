@@ -9,6 +9,7 @@ module.exports = function(grunt) {
                         savePath: 'coverage',
                         report: ['lcov']
                     },
+                    forceExit: true,
                     match: '.',
                     matchAll: false,
                     specFolders: ['spec'],

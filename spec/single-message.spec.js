@@ -16,13 +16,6 @@ describe('Jupiter Single Message', function() {
 		expect(ns.fn).toHaveBeenCalledWith(ns.arg);
 	});
 
-	it('Return an error when no message is given', function() {
-
-		expect(function() {
-			jupiter();
-		}).toThrow(new Error('Jupiter requires a message'));
-	});
-
 	it('Allow a function to subscribe & be called with optional context', function() {
 		var ns = {
 			'name': 'directSubscribe',
@@ -78,10 +71,10 @@ describe('Jupiter Single Message', function() {
 			expect(topics[0].key).toBe(ns.key);
 		});
 
-		testUnsubscribe.unsub();
+		testUnsubscribe.unsub(ns.key);
 
 		testUnsubscribe.prove(function(topics) {
-			expect(topics).toBeUndefined();
+			expect(topics).toEqual([]);
 		});
 	});
 });
