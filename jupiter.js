@@ -1,8 +1,8 @@
 /**
  * JupiterJS
  * MIT License (http://honyovk.com/mit.txt).
- * Version 1.2.1
-*/
+ * Version 1.2.2
+ */
 (function(context, factory) {
     if (typeof define === 'function' && define.amd) {
         define(function() {
@@ -29,9 +29,8 @@
     };
 
     jupiter = function(_context, topic) {
-        var proto = {};
 
-        proto.sub = function(key, fn, context) {
+        function sub(key, fn, context) {
             var newTopic = {};
 
             if (!topics.hasOwnProperty(topic)) {
@@ -45,9 +44,9 @@
             topics[topic].push(newTopic);
 
             return this;
-        };
+        }
 
-        proto.pub = function() {
+        function pub() {
             var msg;
             var i;
             var len;
@@ -57,15 +56,16 @@
             }
 
             msg = topics[topic];
+            len = msg.length;
 
-            for (i = 0, len = msg.length; i < len; i++) {
+            for (i = 0; i < len; i++) {
                 msg[i].fn.apply(msg[i].context, arguments);
             }
 
             return this;
-        };
+        }
 
-        proto.unsub = function(key) {
+        function unsub(key) {
             var i;
             var len;
 
@@ -74,7 +74,9 @@
             }
 
             if (!!key) {
-                for (i = 0, len = topics[topic].length; i < len; i++) {
+                len = topics[topic].length;
+
+                for (i = 0; i < len; i++) {
                     if (topics[topic][i].key === key) {
                         topics[topic].splice(i, 1);
                         break;
@@ -85,9 +87,9 @@
 
             delete topics[topic];
             return this;
-        };
+        }
 
-        proto.prove = function(fn, all) {
+        function prove(fn, all) {
             var _this = this;
             var retValue = (!!all) ? topics : topics[topic];
 
@@ -95,9 +97,15 @@
                 fn.call(_this, retValue);
             }
             return _this;
-        };
+        }
 
-        return proto;
+        // Can easily alias methods here
+        return {
+            'sub': sub,
+            'pub': pub,
+            'unsub': unsub,
+            'prove': prove
+        };
     };
 
 
@@ -113,8 +121,9 @@
 
         if (typeOf(topic) === 'array') {
             multiTopic = {};
+            len = topic.length;
 
-            for (i = 0, len = topic.length; i < len; i++) {
+            for (i = 0; i < len; i++) {
                 multiTopic[topic[i]] = jupiter(_this, topic[i]);
             }
             return multiTopic;
