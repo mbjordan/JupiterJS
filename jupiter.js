@@ -5,8 +5,10 @@
  */
 
 (function(window) {
-    var topics = {},
-        typeOf, jupiter, init;
+    var topics = {};
+    var typeOf;
+    var jupiter;
+    var init;
 
     typeOf = function(what) {
         return Object.prototype.toString.call(what || null).replace(/\[object\s|\]/g, '').toLowerCase();
@@ -32,7 +34,9 @@
         };
 
         proto.pub = function() {
-            var msg, i, len;
+            var msg;
+            var i;
+            var len;
 
             if (!topics.hasOwnProperty(topic)) {
                 return this;
@@ -48,7 +52,8 @@
         };
 
         proto.unsub = function(key) {
-            var i, len;
+            var i;
+            var len;
 
             if (!topics.hasOwnProperty(topic)) {
                 return this;
@@ -69,8 +74,8 @@
         };
 
         proto.prove = function(fn, all) {
-            var _this = this,
-                retValue = (!!all) ? topics : topics[topic];
+            var _this = this;
+            var retValue = (!!all) ? topics : topics[topic];
 
             if (!!fn && typeOf(fn) === 'function') {
                 fn.call(_this, retValue);
@@ -82,8 +87,10 @@
     };
 
     init = function(topic) {
-        var _this = this,
-            multiTopic, i, len;
+        var _this = this;
+        var multiTopic;
+        var i;
+        var len;
 
         if (!topic) {
             throw new Error('Jupiter requires a topic');
