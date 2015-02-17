@@ -1,6 +1,6 @@
-var jupiter = require("../jupiter");
+var jupiter = require('../jupiter');
 
-describe("Jupiter Expected Failures", function() {
+describe('Jupiter Expected Failures', function() {
 
 	it('Throw an error when no message is given', function() {
 		expect(function() {
