@@ -1,6 +1,6 @@
 ### 1.2.1
 
-* Interal changes. API Still the same.
+* Internal changes. API Still the same.
 
 ### 1.2.0
 

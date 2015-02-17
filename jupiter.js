@@ -2,13 +2,27 @@
  * JupiterJS
  * MIT License (http://honyovk.com/mit.txt).
  * Version 1.2.1
- */
+*/
+(function(context, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(function() {
+            return factory.call(context);
+        });
+        return;
+    }
 
-(function(window) {
+    if ('undefined' !== typeof module && module.exports) {
+        module.exports = factory.call(context);
+        return;
+    }
+
+    if ('undefined' !== typeof window) {
+        window.jupiter = factory.call(context);
+    }
+}(this, function factory() {
     var topics = {};
     var typeOf;
     var jupiter;
-    var init;
 
     typeOf = function(what) {
         return Object.prototype.toString.call(what || null).replace(/\[object\s|\]/g, '').toLowerCase();
@@ -86,7 +100,8 @@
         return proto;
     };
 
-    init = function(topic) {
+
+    return function(topic) {
         var _this = this;
         var multiTopic;
         var i;
@@ -107,18 +122,4 @@
 
         return jupiter(_this, topic);
     };
-
-    if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return init;
-        });
-        return;
-    }
-
-    if ('undefined' !== typeof module && module.exports) {
-        module.exports = init;
-        return;
-    }
-
-    window.jupiter = init;
-}(('undefined' !== typeof window) ? window : {}));
+}));
