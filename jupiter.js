@@ -24,11 +24,11 @@
     var typeOf;
     var jupiter;
 
-    typeOf = function(what) {
+    typeOf = function typeOf(what) {
         return Object.prototype.toString.call(what || null).replace(/\[object\s|\]/g, '').toLowerCase();
     };
 
-    jupiter = function(_context, topic) {
+    jupiter = function jupiter(_context, topic) {
 
         function sub(key, fn, context) {
             var newTopic = {};
@@ -107,7 +107,6 @@
             'prove': prove
         };
     };
-
 
     return function(topic) {
         var _this = this;
