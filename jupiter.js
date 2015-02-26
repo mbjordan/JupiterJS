@@ -3,8 +3,7 @@
  * MIT License (http://honyovk.com/mit.txt).
  * Version 1.2.2
  */
-;
-(function(context, factory) {
+;(function(context, factory) {
     if (typeof define === 'function' && define.amd) {
         define(function() {
             return factory.call(context);
@@ -44,6 +43,7 @@
 
     function jupiter(defaultContext, topic) {
 
+        // ---- Helper Functions ----
         function argsToArray(args) {
             return Array.prototype.slice.call(args);
         }
@@ -67,6 +67,19 @@
             };
         }
 
+        function unsubWithKey(key) {
+            forEach(topics[topic], function(val, i) {
+                if (val.key === key) {
+                    topics[topic].splice(i, 1);
+                }
+            });
+        }
+
+        function proveAllOrOne(all) {
+            return (!!all) ? topics : topics[topic];
+        }
+
+        // ---- Main Functions ----
         function sub() {
             if (!topics.hasOwnProperty(topic)) {
                 topics[topic] = [];
@@ -87,14 +100,6 @@
             return this;
         }
 
-        function unsubWithKey(key) {
-            forEach(topics[topic], function(val, i) {
-                if (val.key === key) {
-                    topics[topic].splice(i, 1);
-                }
-            });
-        }
-
         function unsub(key) {
             if (!topics.hasOwnProperty(topic)) {
                 return this;
@@ -109,10 +114,6 @@
             return this;
         }
 
-        function proveAllOrOne(all) {
-            return (!!all) ? topics : topics[topic];
-        }
-
         function prove(fn, all) {
             if (!!fn && typeOf(fn, 'function')) {
                 fn.call(this, proveAllOrOne(all));
@@ -121,7 +122,7 @@
         }
 
         // Define the public API
-        // Also useful for aliasing
+        // Gives full control & useful for aliasing
         return {
             'sub': sub,
             'pub': pub,
