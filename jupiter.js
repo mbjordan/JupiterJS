@@ -40,14 +40,12 @@
     function jupiter(defaultContext, topic) {
 
         function parseArguments(checkA, checkB, type, defaultVal) {
-            if (!!checkA && typeOf(checkA, type)){
+            if (!!checkA && typeOf(checkA, type)) {
                 return checkA;
             }
-
-            if (!!checkB && typeOf(checkB, type)){
+            if (!!checkB && typeOf(checkB, type)) {
                 return checkB;
             }
-
             return defaultVal;
         }
 
