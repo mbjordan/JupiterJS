@@ -67,7 +67,7 @@ describe('Jupiter Single Message', function() {
 
         testUnsubscribe.unsub();
 
-        testUnsubscribe.prove(function(topics) {
+        testUnsubscribe.list(function(topics) {
             expect(topics).toBeUndefined();
         });
     });
@@ -87,13 +87,13 @@ describe('Jupiter Single Message', function() {
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
 
-        testUnsubscribe.prove(function(topics) {
+        testUnsubscribe.list(function(topics) {
             expect(topics[0].key).toBe(ns.key);
         });
 
         testUnsubscribe.unsub(ns.key);
 
-        testUnsubscribe.prove(function(topics) {
+        testUnsubscribe.list(function(topics) {
             expect(topics).toEqual([]);
         });
     });

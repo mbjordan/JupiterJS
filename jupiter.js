@@ -66,7 +66,7 @@
             };
         }
 
-        function unsubWithKey(key) {
+        function unSubscribeWithKey(key) {
             forEach(topics[topic], function(val, i) {
                 if (val.key === key) {
                     topics[topic].splice(i, 1);
@@ -79,7 +79,7 @@
         }
 
         // ---- Main Functions ----
-        function sub() {
+        function subscribe() {
             if (!topics.hasOwnProperty(topic)) {
                 topics[topic] = [];
             }
@@ -87,7 +87,7 @@
             return this;
         }
 
-        function pub() {
+        function publish() {
             var args = arguments;
             if (!topics.hasOwnProperty(topic)) {
                 return this;
@@ -98,19 +98,19 @@
             return this;
         }
 
-        function unsub(key) {
+        function unSubscribe(key) {
             if (!topics.hasOwnProperty(topic)) {
                 return this;
             }
             if (!!key) {
-                unsubWithKey(key);
+                unSubscribeWithKey(key);
                 return this;
             }
             delete topics[topic];
             return this;
         }
 
-        function prove(fn, all) {
+        function list(fn, all) {
             if (!!fn && typeOf(fn, 'function')) {
                 fn.call(this, proveAllOrOne(all));
             }
@@ -120,10 +120,14 @@
         // Define the public API
         // Gives full control & useful for aliasing
         return {
-            'sub': sub,
-            'pub': pub,
-            'unsub': unsub,
-            'prove': prove
+            'subscribe': subscribe,
+            'sub': subscribe,
+            'publish': publish,
+            'pub': publish,
+            'unsubscribe': unSubscribe,
+            'unsub': unSubscribe,
+            'list': list,
+            'prove': list // deprecated
         };
     }
 
