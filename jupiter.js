@@ -3,6 +3,7 @@
  * MIT License (http://honyovk.com/mit.txt).
  * Version 1.2.2
  */
+;
 (function(context, factory) {
     if (typeof define === 'function' && define.amd) {
         define(function() {
@@ -37,23 +38,32 @@
         }
     }
 
+    function error(err) {
+        throw new Error(err);
+    }
+
     function jupiter(defaultContext, topic) {
 
-        function parseArguments(checkA, checkB, type, defaultVal) {
-            if (!!checkA && typeOf(checkA, type)) {
-                return checkA;
-            }
-            if (!!checkB && typeOf(checkB, type)) {
-                return checkB;
-            }
-            return defaultVal;
+        function argsToArray(args) {
+            return Array.prototype.slice.call(args);
         }
 
-        function generateNewTopicObject(key, fn, context) {
+        // When using, `value` should be set to desired default
+        function parseArguments(args, type, value) {
+            forEach(argsToArray(args), function(val) {
+                if (typeOf(val, type)) {
+                    value = val;
+                }
+            });
+
+            return value;
+        }
+
+        function getNewTopicObject() {
             return {
-                'key': parseArguments(key, null, 'string', '_' + new Date().getTime()),
-                'fn': parseArguments(key, fn, 'function', function() {}),
-                'context': parseArguments(fn, context, 'object', defaultContext)
+                'key': parseArguments(arguments, 'string', '_' + new Date().getTime()),
+                'fn': parseArguments(arguments, 'function', function() {}),
+                'context': parseArguments(arguments, 'object', defaultContext)
             };
         }
 
@@ -61,14 +71,16 @@
             if (!topics.hasOwnProperty(topic)) {
                 topics[topic] = [];
             }
-            topics[topic].push(generateNewTopicObject.apply(this, arguments));
+            topics[topic].push(getNewTopicObject.apply(this, arguments));
             return this;
         }
 
         function pub() {
             var args = arguments;
 
-            if (!topics.hasOwnProperty(topic)) return this;
+            if (!topics.hasOwnProperty(topic)) {
+                return this;
+            }
             forEach(topics[topic], function(val) {
                 val.fn.apply(val.context, args);
             });
@@ -84,7 +96,9 @@
         }
 
         function unsub(key) {
-            if (!topics.hasOwnProperty(topic)) return this;
+            if (!topics.hasOwnProperty(topic)) {
+                return this;
+            }
 
             if (!!key) {
                 unsubWithKey(key);
@@ -128,7 +142,7 @@
 
     function JupiterInstance(topic) {
         if (!topic) {
-            throw new Error('Jupiter requires a topic');
+            error('Jupiter requires a topic');
         }
 
         if (typeOf(topic, 'array')) {
