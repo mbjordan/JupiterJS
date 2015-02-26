@@ -22,13 +22,13 @@
 }(this, function factory() {
     var topics = {};
 
-    function typeOf(what, comparitor) {
-        return Object.prototype.toString.call(what || null)
-            .replace(/\[object\s|\]/g, '').toLowerCase() === comparitor;
+    function typeOf(value, comparator) {
+        return Object.prototype.toString.call(value || null)
+            .replace(/\[object\s|\]/g, '').toLowerCase() === comparator.toLowerCase();
     }
 
-    function getLength(arr) {
-        return arr.length;
+    function getLength(value) {
+        return value.length;
     }
 
     function forEach(arr, fn) {
@@ -55,7 +55,6 @@
                     value = val;
                 }
             });
-
             return value;
         }
 
@@ -90,7 +89,6 @@
 
         function pub() {
             var args = arguments;
-
             if (!topics.hasOwnProperty(topic)) {
                 return this;
             }
@@ -104,12 +102,10 @@
             if (!topics.hasOwnProperty(topic)) {
                 return this;
             }
-
             if (!!key) {
                 unsubWithKey(key);
                 return this;
             }
-
             delete topics[topic];
             return this;
         }
@@ -134,7 +130,6 @@
     function JupiterInstanceMultiTopic(topics) {
         var _this = this;
         var multiTopicObj = {};
-
         forEach(topics, function(val) {
             multiTopicObj[val] = jupiter(_this, val);
         });
@@ -145,11 +140,9 @@
         if (!topic) {
             error('Jupiter requires a topic');
         }
-
         if (typeOf(topic, 'array')) {
             return JupiterInstanceMultiTopic.call(this, topic);
         }
-
         return jupiter.call(this, topic);
     }
 
