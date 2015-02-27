@@ -119,16 +119,20 @@
 
         // Define the public API
         // Gives full control & useful for aliasing
-        return {
-            'subscribe': subscribe,
-            'sub': subscribe,
-            'publish': publish,
-            'pub': publish,
-            'unsubscribe': unSubscribe,
-            'unsub': unSubscribe,
-            'list': list,
-            'prove': list // deprecated
-        };
+        function createPublicApi() {
+            return {
+                'subscribe': subscribe,
+                'sub': subscribe,
+                'publish': publish,
+                'pub': publish,
+                'unsubscribe': unSubscribe,
+                'unsub': unSubscribe,
+                'list': list,
+                'prove': list // deprecated
+            };
+        }
+
+        return createPublicApi();
     }
 
     function JupiterInstanceMultiTopic(topics) {
