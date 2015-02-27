@@ -34,15 +34,15 @@ describe('Jupiter Single Message', function() {
 
 
     it('Allow a function to subscribe & be called with optional key & context', function() {
-        var _this = this,
-            ns = {
-                'name': 'directSubscribe',
-                'fn': function(arg) {
-                    expect(typeof this.results_).toEqual('object');
-                },
-                'arg': '_argumentDirect',
-                'key': '_testFn'
-            };
+        var _this = this;
+        var ns = {
+            'name': 'directSubscribe',
+            'fn': function(arg) {
+                expect(typeof this.results_).toEqual('object');
+            },
+            'arg': '_argumentDirect',
+            'key': '_testFn'
+        };
 
         spyOn(ns, 'fn').andCallThrough();
 
@@ -53,11 +53,11 @@ describe('Jupiter Single Message', function() {
 
     it('Allow a function to subscribe, be called, & unsubscribed', function() {
         var ns = {
-                'name': 'testUnsubscribe1',
-                'fn': function(arg) {},
-                'arg': '_argumentUnsub'
-            },
-            testUnsubscribe = jupiter(ns.name);
+            'name': 'testUnsubscribe1',
+            'fn': function(arg) {},
+            'arg': '_argumentUnsub'
+        };
+        var testUnsubscribe = jupiter(ns.name);
 
         spyOn(ns, 'fn');
 
@@ -72,14 +72,33 @@ describe('Jupiter Single Message', function() {
         });
     });
 
+    it('Allow a function to subscribe & unsubscribe, then test to make sure it cannot be called', function() {
+        var ns = {
+            'name': 'testUnsubscribe1',
+            'fn': function(arg) {},
+            'arg': '_argumentUnsub'
+        };
+        var testUnsubscribe = jupiter(ns.name);
+
+        spyOn(ns, 'fn');
+
+        testUnsubscribe
+            .sub(ns.fn)
+            .unsub()
+            .pub(ns.arg);
+
+        expect(ns.fn).not.toHaveBeenCalledWith(ns.arg);
+
+    });
+
     it('Allow a function with optional key to subscribe, be called, & unsubscribed', function() {
         var ns = {
-                'name': 'testUnsubscribe2',
-                'fn': function(arg) {},
-                'arg': '_argumentUnsub',
-                'key': '_testFn'
-            },
-            testUnsubscribe = jupiter(ns.name);
+            'name': 'testUnsubscribe2',
+            'fn': function(arg) {},
+            'arg': '_argumentUnsub',
+            'key': '_testFn'
+        };
+        var testUnsubscribe = jupiter(ns.name);
 
         spyOn(ns, 'fn');
 

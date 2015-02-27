@@ -99,9 +99,6 @@
         }
 
         function unSubscribe(key) {
-            if (!topics.hasOwnProperty(topic)) {
-                return this;
-            }
             if (!!key) {
                 unSubscribeWithKey(key);
                 return this;
