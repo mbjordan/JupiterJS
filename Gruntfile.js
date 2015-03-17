@@ -20,7 +20,7 @@ module.exports = function(grunt) {
                         report: false
                     }
                 },
-                src: ['jupiter.js', 'lib/type-of.js']
+                src: ['jupiter.js']
             }
         },
         coveralls: {
