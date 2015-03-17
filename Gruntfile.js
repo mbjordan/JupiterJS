@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         jasmine_node: {
-            jupiter_test: {
+            jupiter: {
                 options: {
                     coverage: {
                         reportFile: 'coverage.json',
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             }
         },
         coveralls: {
-            jupiter_test: {
+            jupiter: {
                 src: 'coverage/lcov.info',
                 force: true
             }
@@ -34,6 +34,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jasmine-node-coverage');
     grunt.loadNpmTasks('grunt-coveralls');
 
-    grunt.registerTask('jastest', 'jasmine_node:jupiter_test');
-    grunt.registerTask('coverload', 'coveralls:jupiter_test');
+    grunt.registerTask('test', 'jasmine_node:jupiter');
 };

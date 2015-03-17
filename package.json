@@ -4,7 +4,7 @@
   "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
   "main": "index.js",
   "scripts": {
-    "test": "grunt jastest && grunt coverload"
+    "test": "grunt jasmine_node:jupiter && grunt coveralls:jupiter"
   },
   "repository": {
     "type": "git",
