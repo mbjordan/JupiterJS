@@ -78,7 +78,7 @@
             return (!!all) ? topics : topics[topic];
         }
 
-        // ---- Main Functions ----
+        // ---- Main API Functions ----
         function subscribe() {
             if (!topics.hasOwnProperty(topic)) {
                 topics[topic] = [];
@@ -132,7 +132,7 @@
         return createPublicApi();
     }
 
-    function JupiterInstanceMultiTopic(topics) {
+    function jupiterInstanceMultiTopic(topics) {
         var _this = this;
         var multiTopicObj = {};
         forEach(topics, function(val) {
@@ -141,15 +141,15 @@
         return multiTopicObj;
     }
 
-    function JupiterInstance(topic) {
+    function jupiterInstance(topic) {
         if (!topic) {
             error('Jupiter requires a topic');
         }
         if (typeOf(topic, 'array')) {
-            return JupiterInstanceMultiTopic.call(this, topic);
+            return jupiterInstanceMultiTopic.call(this, topic);
         }
         return jupiter.call(this, topic);
     }
 
-    return JupiterInstance;
+    return jupiterInstance;
 }));
