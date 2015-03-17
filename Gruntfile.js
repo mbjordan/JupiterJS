@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                     forceExit: true,
                     match: '.',
                     matchAll: false,
-                    specFolders: ['spec'],
+                    specFolders: ['test'],
                     extensions: 'js',
                     specNameMatcher: 'spec',
                     captureExceptions: true,
