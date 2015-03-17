@@ -2,7 +2,7 @@
   "name": "jupiter",
   "version": "1.2.1",
   "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
-  "main": "jupiter.js",
+  "main": "index.js",
   "scripts": {
     "test": "grunt jastest && grunt coverload"
   },
@@ -17,7 +17,7 @@
     "subscribe",
     "event"
   ],
-  "author": "mbjordan",
+  "author": "Matt Jordan",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mbjordan/JupiterJS/issues"

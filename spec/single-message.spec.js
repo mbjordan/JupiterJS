@@ -1,4 +1,4 @@
-var jupiter = require('../jupiter');
+var jupiter = require('../src/jupiter');
 
 describe('Jupiter Single Message', function() {
 

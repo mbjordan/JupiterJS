@@ -20,7 +20,7 @@ module.exports = function(grunt) {
                         report: false
                     }
                 },
-                src: ['jupiter.js']
+                src: ['src/jupiter.js']
             }
         },
         coveralls: {

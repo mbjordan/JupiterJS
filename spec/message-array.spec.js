@@ -1,4 +1,4 @@
-var jupiter = require('../jupiter');
+var jupiter = require('../src/jupiter');
 var messageArr = ['testMessage1', 'testMessage2', 'testMessage3'];
 var jupiterTestObj = jupiter(messageArr);
 
