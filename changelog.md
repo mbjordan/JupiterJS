@@ -1,3 +1,9 @@
+### 1.3.1
+
+* Removed the `window.jupiter` exposure and replaced with `context.jupiter`, where `context` is the `this` keyword passed at the first argument to the IIFE.
+
+---
+
 ### 1.3.0
 
 * Added new method for using objects during initiation.

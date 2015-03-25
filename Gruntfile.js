@@ -28,11 +28,30 @@ module.exports = function(grunt) {
                 src: 'coverage/lcov.info',
                 force: true
             }
+        },
+        uglify: {
+            jupiter: {
+                src: 'src/jupiter.js',
+                dest: 'dist/jupiter.min2.js',
+                options:{
+                    banner: [
+                        '/**',
+                        ' * JupiterJS - 1.3.1-dev',
+                        ' * https://github.com/mbjordan/JupiterJS',
+                        ' * MIT License (http://honyovk.com/mit.txt).',
+                        ' */',
+                        ';'
+                    ].join('\n')
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-jasmine-node-coverage');
     grunt.loadNpmTasks('grunt-coveralls');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('test', ['jasmine_node:jupiter', 'coveralls:jupiter']);
+    // The coveralls report task is hard coded in package
+    grunt.registerTask('test', 'jasmine_node:jupiter');
+    grunt.registerTask('min', 'uglify:jupiter');
 };

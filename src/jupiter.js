@@ -1,7 +1,7 @@
 /**
- * JupiterJS
+ * JupiterJS - 1.3.1-dev
+ * https://github.com/mbjordan/JupiterJS
  * MIT License (http://honyovk.com/mit.txt).
- * Version 1.3.0
  */
 ;(function(context, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -16,9 +16,8 @@
         return;
     }
 
-    if ('undefined' !== typeof window) {
-        window.jupiter = factory.call(context);
-    }
+    context.jupiter = factory.call(context);
+
 }(this, function factory() {
     var topics = {};
 
