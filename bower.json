@@ -1,7 +1,7 @@
 {
   "name": "jupiter",
   "main": "jupiter.js",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "homepage": "http://honyovk.com/JupiterJS/",
   "description": "Simple, minimal & dependency-free JavaScript Publish/Subscribe",
   "moduleType": [

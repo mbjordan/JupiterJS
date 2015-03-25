@@ -1,7 +1,15 @@
+### 1.3.0
+
+* Added new method for using objects
+
+---
+
 ### 1.2.1
 
 * Converted the pattern of the closure
 * Internal changes. API Still the same.
+
+---
 
 ### 1.2.0
 

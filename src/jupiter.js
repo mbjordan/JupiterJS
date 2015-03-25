@@ -33,7 +33,7 @@
 
     function forEach(arr, fn) {
         for (var i = 0; i < getLength(arr); i++) {
-            fn(arr[i], i, arr);
+            fn.call(arr, arr[i], i);
         }
     }
 
@@ -135,14 +135,31 @@
     function jupiterArrayMultiTopic(topics) {
         var multiTopicObj = {};
 
-        forEach(topics, function(val) {
+        function arrLoop(val) {
             multiTopicObj[val] = jupiter(this, val);
-        });
+        }
 
+        forEach(topics, arrLoop.bind(this));
         return multiTopicObj;
     }
 
-    function jupiterObjectMultiTopic(topics) {}
+    // Only allows for 1 sub-level
+    function jupiterObjectMultiTopic(topics) {
+        var multiTopicObj = {};
+
+        function objArrLoop(loopIndex, arrElement) {
+            multiTopicObj[loopIndex][arrElement] = jupiter(this, arrElement);
+        }
+
+        for (var i in topics) {
+            if (!typeOf(topics[i], 'array')) continue;
+
+            multiTopicObj[i] = {};
+            forEach(topics[i], objArrLoop.bind(this, i));
+        }
+        return multiTopicObj;
+    }
+
 
     function jupiterInstance(topic) {
         if (!topic) {
@@ -150,14 +167,14 @@
         }
 
         if (typeOf(topic, 'array')) {
-            return jupiterArrayMultiTopic.call(this, topic);
+            return jupiterArrayMultiTopic(topic);
         }
 
         if (typeOf(topic, 'object')) {
-            return jupiterObjectMultiTopic.call(this, topic);
+            return jupiterObjectMultiTopic(topic);
         }
 
-        return jupiter.call(this, topic);
+        return jupiter(topic);
     }
 
     return jupiterInstance;
