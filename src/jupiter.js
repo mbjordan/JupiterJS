@@ -133,11 +133,12 @@
     }
 
     function jupiterArrayMultiTopic(topics) {
-        var _this = this;
         var multiTopicObj = {};
+
         forEach(topics, function(val) {
-            multiTopicObj[val] = jupiter(_this, val);
+            multiTopicObj[val] = jupiter(this, val);
         });
+
         return multiTopicObj;
     }
 
