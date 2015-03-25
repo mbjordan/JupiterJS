@@ -18,7 +18,7 @@ describe('Jupiter Message Object', function() {
     it('Allow a direct function to subscribe & be called for testMessage1.blue', function() {
         var ns = {
             'fn': function(arg) {},
-            'arg': '_testMessage1'
+            'arg': '_testMessage1-blue'
         };
 
         spyOn(ns, 'fn');
@@ -31,7 +31,7 @@ describe('Jupiter Message Object', function() {
     it('Allow a direct function to subscribe & be called for testMessage1.red', function() {
         var ns = {
             'fn': function(arg) {},
-            'arg': '_testMessage1'
+            'arg': '_testMessage1-red'
         };
 
         spyOn(ns, 'fn');
@@ -45,52 +45,16 @@ describe('Jupiter Message Object', function() {
     it('Allow a direct function to subscribe & be called for testMessage2.blue', function() {
         var ns = {
             'fn': function(arg) {},
-            'arg': '_testMessage2'
+            'arg': '_testMessage2-blue'
         };
 
         spyOn(ns, 'fn');
 
-        jupiterTestObj.testMessage2.blue.sub(ns.fn).pub(ns.arg);
+        jupiterTestObj.testMessage2.blue.sub(ns.fn);
 
-        expect(ns.fn).toHaveBeenCalledWith(ns.arg);
-    });
-
-    it('Allow a direct function to subscribe & be called for testMessage2.red', function() {
-        var ns = {
-            'fn': function(arg) {},
-            'arg': '_testMessage2'
-        };
-
-        spyOn(ns, 'fn');
-
-        jupiterTestObj.testMessage2.red.sub(ns.fn).pub(ns.arg);
-
-        expect(ns.fn).toHaveBeenCalledWith(ns.arg);
-    });
-
-
-    it('Allow a direct function to subscribe & be called for testMessage3.blue', function() {
-        var ns = {
-            'fn': function(arg) {},
-            'arg': '_testMessage3'
-        };
-
-        spyOn(ns, 'fn');
-
-        jupiterTestObj.testMessage3.blue.sub(ns.fn).pub(ns.arg);
-
-        expect(ns.fn).toHaveBeenCalledWith(ns.arg);
-    });
-
-    it('Allow a direct function to subscribe & be called for testMessage3.red', function() {
-        var ns = {
-            'fn': function(arg) {},
-            'arg': '_testMessage3'
-        };
-
-        spyOn(ns, 'fn');
-
-        jupiterTestObj.testMessage3.red.sub(ns.fn).pub(ns.arg);
+        jupiter({
+            'testMessage2': ['red', 'blue']
+        }).testMessage2.blue.pub(ns.arg);
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
     });

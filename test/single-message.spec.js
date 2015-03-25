@@ -27,7 +27,9 @@ describe('Jupiter Single Message', function() {
 
         spyOn(ns, 'fn').andCallThrough();
 
-        jupiter(ns.name).sub(ns.fn, this).pub(ns.arg);
+        jupiter(ns.name).sub(ns.fn, this);
+
+        jupiter(ns.name).pub(ns.arg);
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
     });
@@ -46,7 +48,9 @@ describe('Jupiter Single Message', function() {
 
         spyOn(ns, 'fn').andCallThrough();
 
-        jupiter(ns.name).sub(ns.key, ns.fn, _this).pub(ns.arg);
+        jupiter(ns.name).sub(ns.key, ns.fn, _this);
+
+        jupiter(ns.name).pub(ns.arg);
 
         expect(ns.fn).toHaveBeenCalledWith(ns.arg);
     });
