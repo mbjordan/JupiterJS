@@ -1,6 +1,7 @@
 ### 1.3.0
 
-* Added new method for using objects
+* Added new method for using objects during initiation.
+* Now using `Function.prototype.bind`, so IE8 is not supported. (Considering adding a polyfill).
 
 ---
 
