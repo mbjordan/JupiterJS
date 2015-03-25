@@ -1,7 +1,7 @@
 /**
  * JupiterJS
  * MIT License (http://honyovk.com/mit.txt).
- * Version 1.2.2
+ * Version 1.3.0
  */
 ;(function(context, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -132,7 +132,7 @@
         return createPublicApi();
     }
 
-    function jupiterInstanceMultiTopic(topics) {
+    function jupiterArrayMultiTopic(topics) {
         var _this = this;
         var multiTopicObj = {};
         forEach(topics, function(val) {
@@ -141,13 +141,21 @@
         return multiTopicObj;
     }
 
+    function jupiterObjectMultiTopic(topics) {}
+
     function jupiterInstance(topic) {
         if (!topic) {
             error('Jupiter requires a topic');
         }
+
         if (typeOf(topic, 'array')) {
-            return jupiterInstanceMultiTopic.call(this, topic);
+            return jupiterArrayMultiTopic.call(this, topic);
         }
+
+        if (typeOf(topic, 'object')) {
+            return jupiterObjectMultiTopic.call(this, topic);
+        }
+
         return jupiter.call(this, topic);
     }
 

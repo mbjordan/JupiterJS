@@ -34,5 +34,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jasmine-node-coverage');
     grunt.loadNpmTasks('grunt-coveralls');
 
-    grunt.registerTask('test', 'jasmine_node:jupiter');
+    grunt.registerTask('test', ['jasmine_node:jupiter', 'coveralls:jupiter']);
 };
