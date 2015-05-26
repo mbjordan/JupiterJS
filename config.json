@@ -1,0 +1,14 @@
+{
+    "current_version": "1.2.1",
+    "version_history": [
+      "1.2.0",
+      "1.1.1",
+      "1.0.1",
+      "1.0.0"
+    ],
+    "latest_link": "https://github.com/mbjordan/JupiterJS/releases/latest",
+    "sizes": {
+        "unminified": "3.55 KB",
+        "minified": "1.40 KB"
+    }
+}

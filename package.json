@@ -1,0 +1,20 @@
+{
+  "name": "jupiter-pages",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mbjordan/JupiterJS.git"
+  },
+  "author": "Matt Jordan",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/mbjordan/JupiterJS/issues"
+  },
+  "homepage": "https://github.com/mbjordan/JupiterJS",
+  "dependencies": {
+    "jade": "^1.7.0",
+    "marked": "^0.3.2",
+    "highlight.js": "^8.3.0"
+  }
+}
