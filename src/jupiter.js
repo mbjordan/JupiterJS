@@ -3,22 +3,22 @@
  * https://github.com/mbjordan/JupiterJS
  * MIT License (http://honyovk.com/mit.txt).
  */
-;(function(context, factory) {
+(function(globals, factory) {
+    if ('undefined' !== typeof module && module.exports) {
+        module.exports = factory.call(globals);
+        return;
+    }
+
     if (typeof define === 'function' && define.amd) {
         define(function() {
-            return factory.call(context);
+            return factory.call(globals);
         });
         return;
     }
 
-    if ('undefined' !== typeof module && module.exports) {
-        module.exports = factory.call(context);
-        return;
-    }
+    globals.jupiter = factory.call(globals);
 
-    context.jupiter = factory.call(context);
-
-}(this, function factory() {
+}(('undefined' !== typeof window) ? window : this, function factory() {
     var topics = {};
 
     function typeOf(value, comparator) {
@@ -32,6 +32,8 @@
         }
     }
 
+    // This is abstracted to it's own function so any future changes that need
+    // to be made are done in one place.
     function error(err) {
         throw new Error(err);
     }
@@ -69,11 +71,11 @@
             });
         }
 
-        function proveAllOrOne(all) {
+        function listAllOrOne(all) {
             return (!!all) ? topics : topics[topic];
         }
 
-        // ---- Main API Functions ----
+        // ---- Public API Functions ----
         function subscribe() {
             if (!topics.hasOwnProperty(topic)) {
                 topics[topic] = [];
@@ -102,9 +104,9 @@
             return this;
         }
 
-        function list(fn, all) {
+        function listTopics(fn, all) {
             if (!!fn && typeOf(fn, 'function')) {
-                fn.call(this, proveAllOrOne(all));
+                fn.call(this, listAllOrOne(all));
             }
             return this;
         }
@@ -119,8 +121,8 @@
                 'pub': publish,
                 'unsubscribe': unSubscribe,
                 'unsub': unSubscribe,
-                'list': list,
-                'prove': list // deprecated
+                'list': listTopics,
+                'prove': listTopics // Deprecated. Removal in >= v1.4.x
             };
         }
 

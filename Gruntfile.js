@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         uglify: {
             jupiter: {
                 src: 'src/jupiter.js',
-                dest: 'dist/jupiter.min2.js',
+                dest: 'dist/jupiter.min.js',
                 options:{
                     banner: [
                         '/**',
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // The coveralls report task is hard coded in package
+    // The coveralls report task is hard coded in package.json
     grunt.registerTask('test', 'jasmine_node:jupiter');
     grunt.registerTask('min', 'uglify:jupiter');
 };
