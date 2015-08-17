@@ -18,7 +18,7 @@
 
     globals.jupiter = factory.call(globals);
 
-}(('undefined' !== typeof window) ? window : this, function factory() {
+}(this, function factory() {
     var topics = {};
 
     function typeOf(value, comparator) {
@@ -98,9 +98,10 @@
         function unSubscribe(key) {
             if (!!key) {
                 unSubscribeWithKey(key);
-                return this;
+            } else {
+                delete topics[topic];
             }
-            delete topics[topic];
+
             return this;
         }
 
@@ -122,7 +123,7 @@
                 'unsubscribe': unSubscribe,
                 'unsub': unSubscribe,
                 'list': listTopics,
-                'prove': listTopics // Deprecated. Removal in >= v1.4.x
+                'prove': listTopics // Deprecated
             };
         }
 
@@ -159,7 +160,7 @@
     }
 
 
-    function jupiterInstance(topic) {
+    return function jupiterInstance(topic) {
         if (!topic) {
             error('Jupiter requires a topic');
         }
@@ -173,7 +174,5 @@
         }
 
         return jupiter(topic);
-    }
-
-    return jupiterInstance;
+    };
 }));
